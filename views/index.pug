@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  
+  //- p Welcome to #{body}
+  //- h1 BBB
+  <div class="container">
+    <h1>Job Tracker</h1>
+    <form method="POST">
+      <div class="form-group">
+        <label><h3>Job</h3></label>
+        input(type='text',class="form-control", placeholder="Job Identifier", name='job', value=`${jobSearch}`)
+      </div>
+      <div class="form-group">
+        <label><h3>Shipment</h3></label>
+        input(type='text',class="form-control", placeholder="Shipment Identifier", name='shipment', value=`${shipmentSearch}`)
+      </div>
+      <button style="margin-top:15px;" type="submit" class="btn btn-primary">Find</button>
+    </form>
+    if jobs.length > 0
+      h3 Jobs Found: #{jobs.length}
+      <table class="table">
+        tr
+          td Job
+          td Shipment
+          td Status
+          td Latitude
+          td Longitude
+        each job in jobs
+          tr
+            td #{job.job}
+            td #{job.shipment}
+            td #{job.status}
+            td #{job.latitude}
+            td #{job.longitude}
+      </table>
+  </div>
