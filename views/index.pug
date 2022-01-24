@@ -1,9 +1,6 @@
 extends layout
 
 block content
-  
-  //- p Welcome to #{body}
-  //- h1 BBB
   <div class="container">
     <h1>Job Tracker</h1>
     <form method="POST">
@@ -31,7 +28,7 @@ block content
             td #{job.job}
             td #{job.shipment}
             td #{job.status}
-            td #{job.latitude}
-            td #{job.longitude}
+            td(style='text-align:right') #{job.latitude}
+            td(style='text-align:right') #{job.longitude}
       </table>
   </div>

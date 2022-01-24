@@ -26,11 +26,11 @@ router.get('/:job', async function(req, res, next) {
 });
 
 
-/* GET specific jobs. */
+/* GET specific shipment. */
 router.get('/shipment/:shipment', async function(req, res, next) {
   try {
     const dbConnect = await dbo.getDb();
-    const findResult = await dbConnect.collection("brokerage_job").find({"shipment":req.params.shipment}).toArray();
+    const findResult = await dbConnect.collection("brokerage_job").find({"shipment":req.params.shipment}).next();
     res.json(findResult);
   } catch (error) {
     res.status(500).send(error);
@@ -56,6 +56,7 @@ router.post('/updatelocation', async function(req, res, next) {
   try {
     const job = new Job(req.body, {skipJob:true, skipStatus:true});
     const dbConnect = await dbo.getDb();
+    // Ignores other data sent on Job and updates Lat/Long
     await dbConnect.collection('brokerage_job').updateOne(
       {"shipment" : job.shipment,},
       {

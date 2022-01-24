@@ -36,6 +36,7 @@ class Job {
         }
         
         if(!error && (options.skipStatus === undefined || options.skipStatus === false)) {
+            // Allowed Statuses
             switch(job.status.toUpperCase()) {
                 case 'ADDED':
                 case 'SHIPPED':

@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const dbo = require('../assets/db');
-const Job = require('../model/job');
 
 
 /* GET home page. */
@@ -13,10 +12,16 @@ router.all('/', async function(req, res, next) {
     const dbConnect = await dbo.getDb();
     const criteria = {}
     if(req.body.job !== '') {
-      criteria.job = req.body.job;
+      criteria.job = {
+        $regex: '^'+req.body.job,
+        $options: "i"
+      }
     }
     if(req.body.shipment !== '') {
-      criteria.shipment = req.body.shipment;
+      criteria.shipment = {
+        $regex: '^'+req.body.shipment,
+        $options: "i"
+      }
     }
     jobs = await dbConnect.collection("brokerage_job").find(criteria).toArray();
     console.log('Jobs Found', jobs.length);

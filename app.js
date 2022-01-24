@@ -8,9 +8,6 @@ require('dotenv').config()
 const dbo = require('./assets/db');
 dbo.connectToServer(() => {});
 
-
-
-
 const indexRouter = require('./routes/index');
 const jobsRouter = require('./routes/jobs');
 
